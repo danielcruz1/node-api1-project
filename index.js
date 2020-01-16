@@ -25,6 +25,7 @@ server.post('/api/users', (req, res) => {
         })
         .catch(err => {
             console.log('Error adding user', err);
+            res.status(500).json({ errorMessage: "There was an error while saving the user to the database" })
         })
 })
 
@@ -35,7 +36,7 @@ server.get('/api/users', (req, res) => {
             res.status(200).json(users)
         })
         .catch(err => {
-            console.log('GET /user error', err)
+            console.log('GET user list error', err)
             res.status(500).json({ errorMessage: 'The users information could not be retrieved.' })
         })
 });
@@ -49,6 +50,10 @@ server.get('/api/users/:id', (req, res) => {
             } else {
                 res.status(200).json(user);
             }
+        })
+        .catch(err => {
+            console.log('GET user error', err)
+            res.status(500).json({ errorMessage: 'The users information could not be retrieved.' })
         })
 });
 
